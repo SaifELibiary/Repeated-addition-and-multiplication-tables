@@ -1,0 +1,6 @@
+{
+  "name": "Multiplication World: Grade 3 Math",
+  "description": "Interactive Grade 3 Math learning app for repeated addition, multiplication concepts, and times tables 1 to 9 with Mr. Saif!",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
