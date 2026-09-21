@@ -3,6 +3,10 @@ import { TeacherSettings, HighScoreRecord } from '../types';
 import { MrSaifGuide } from './MrSaifGuide';
 import { BranchingTreeDiagram, BranchProblem } from './BranchingTreeDiagram';
 import { soundEffects } from '../utils/audio';
+import { Chapter1ProgressBar } from './Chapter1ProgressBar';
+import { Chapter1QuizModal } from './Chapter1QuizModal';
+import { Chapter1Lesson2ExpandedPractice } from './Chapter1Lesson2ExpandedPractice';
+import { getCh1CompletedQuestions } from '../utils/storage';
 import {
   Sparkles,
   ArrowRight,
@@ -13,6 +17,7 @@ import {
   Lightbulb,
   Split,
   Trophy,
+  Layers,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -31,7 +36,9 @@ export const Chapter1Lesson2: React.FC<Chapter1Lesson2Props> = ({
   onNavigateToModule1,
   onNavigateToLesson1,
 }) => {
-  const [activeTab, setActiveTab] = useState<'demo' | 'warmup' | 'practice' | 'exercises'>('demo');
+  const [activeTab, setActiveTab] = useState<'demo' | 'warmup' | 'practice' | 'exercises' | 'expanded'>('demo');
+  const [isQuizModalOpen, setIsQuizModalOpen] = useState(false);
+  const [ch1CompletedList, setCh1CompletedList] = useState<string[]>(() => getCh1CompletedQuestions());
 
   // Interactive Demo 1: Splitting 9 into parts for 9 x 3
   const [split9Option, setSplit9Option] = useState<{ partA: number; partB: number }>({ partA: 4, partB: 5 });
@@ -343,6 +350,15 @@ export const Chapter1Lesson2: React.FC<Chapter1Lesson2Props> = ({
         speechEnabled={settings.speechEnabled}
       />
 
+      {/* Chapter 1 Progress Bar & Mastery Quiz Trigger */}
+      <Chapter1ProgressBar
+        completedCount={ch1CompletedList.length}
+        totalCount={35}
+        record={record}
+        onOpenQuiz={() => setIsQuizModalOpen(true)}
+        accentColor="amber"
+      />
+
       {/* Tabs */}
       <div className="flex flex-wrap items-center gap-2 border-b-2 border-amber-200/80 pb-3">
         <button
@@ -403,6 +419,24 @@ export const Chapter1Lesson2: React.FC<Chapter1Lesson2Props> = ({
         >
           <Award className="w-4 h-4" />
           <span>4. Exercises (6 Tree Drills)</span>
+        </button>
+
+        <button
+          onClick={() => {
+            soundEffects.pop();
+            setActiveTab('expanded');
+          }}
+          className={`flex items-center gap-2 px-4 py-2 rounded-2xl font-fun font-bold text-sm transition-all cursor-pointer ${
+            activeTab === 'expanded'
+              ? 'bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-md scale-102 ring-2 ring-amber-300'
+              : 'bg-amber-50 text-amber-900 hover:bg-amber-100 border border-amber-200'
+          }`}
+        >
+          <Layers className="w-4 h-4" />
+          <span>5. 🧩 Expanded Sets (A, B, C)</span>
+          <span className="text-2xs font-black uppercase bg-emerald-500 text-white px-1.5 py-0.5 rounded-full">
+            13 Qs
+          </span>
         </button>
       </div>
 
@@ -817,6 +851,27 @@ export const Chapter1Lesson2: React.FC<Chapter1Lesson2Props> = ({
           </div>
         </div>
       )}
+
+      {/* TAB 5: EXPANDED PRACTICE SETS (A, B, C) */}
+      {activeTab === 'expanded' && (
+        <Chapter1Lesson2ExpandedPractice
+          settings={settings}
+          record={record}
+          onUpdateRecord={onUpdateRecord}
+          onQuestionSolved={qid => {
+            setCh1CompletedList(prev => (prev.includes(qid) ? prev : [...prev, qid]));
+          }}
+        />
+      )}
+
+      {/* Chapter 1 Mastery Quiz Modal */}
+      <Chapter1QuizModal
+        isOpen={isQuizModalOpen}
+        onClose={() => setIsQuizModalOpen(false)}
+        settings={settings}
+        record={record}
+        onUpdateRecord={onUpdateRecord}
+      />
     </div>
   );
 };

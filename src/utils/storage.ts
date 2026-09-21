@@ -70,7 +70,40 @@ export const INITIAL_BADGES: Badge[] = [
     icon: '🦸‍♀️',
     color: 'bg-teal-100 text-teal-700 border-teal-300',
   },
+  {
+    id: 'chapter1_grandmaster',
+    title: 'Chapter 1 Grandmaster 👑',
+    description: 'Mastered Chapter 1 rules, distributive decomposition, and the mastery quiz!',
+    icon: '👑',
+    color: 'bg-purple-100 text-purple-700 border-purple-300',
+  },
 ];
+
+const CH1_PROGRESS_KEY = 'grade3_math_ch1_progress_v1';
+
+export function getCh1CompletedQuestions(): string[] {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = localStorage.getItem(CH1_PROGRESS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveCh1CompletedQuestion(questionId: string): string[] {
+  if (typeof window === 'undefined') return [];
+  try {
+    const list = getCh1CompletedQuestions();
+    if (!list.includes(questionId)) {
+      list.push(questionId);
+      localStorage.setItem(CH1_PROGRESS_KEY, JSON.stringify(list));
+    }
+    return list;
+  } catch {
+    return [];
+  }
+}
 
 export function getStoredSettings(): TeacherSettings {
   if (typeof window === 'undefined') return DEFAULT_SETTINGS;

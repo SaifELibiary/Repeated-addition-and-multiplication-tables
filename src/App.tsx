@@ -88,6 +88,7 @@ export default function App() {
             }}
             settings={settings}
             record={record}
+            onUpdateRecord={handleUpdateRecord}
             onOpenTeacherSettings={() => setIsSettingsOpen(true)}
           />
         )}

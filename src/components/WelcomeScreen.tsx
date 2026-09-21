@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ScreenId, TeacherSettings, HighScoreRecord } from '../types';
 import { MrSaifAvatar, MrSaifGuide } from './MrSaifGuide';
 import { soundEffects, speakText } from '../utils/audio';
+import { Chapter1ProgressBar } from './Chapter1ProgressBar';
+import { Chapter1QuizModal } from './Chapter1QuizModal';
+import { getCh1CompletedQuestions } from '../utils/storage';
 import { Sparkles, ArrowRight, Play, BookOpen, Trophy, Award, Star, CheckCircle2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -9,6 +12,7 @@ interface WelcomeScreenProps {
   onNavigate: (screen: ScreenId) => void;
   settings: TeacherSettings;
   record: HighScoreRecord;
+  onUpdateRecord: (updated: HighScoreRecord) => void;
   onOpenTeacherSettings: () => void;
 }
 
@@ -16,8 +20,12 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
   onNavigate,
   settings,
   record,
+  onUpdateRecord,
   onOpenTeacherSettings,
 }) => {
+  const [isQuizOpen, setIsQuizOpen] = useState(false);
+  const [ch1CompletedList] = useState<string[]>(() => getCh1CompletedQuestions());
+
   const triggerGreetingConfetti = () => {
     soundEffects.star();
     confetti({
@@ -137,6 +145,15 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
             2 Interactive Lessons with Guided Trees & Drills
           </span>
         </div>
+
+        {/* Chapter 1 Progress Bar & Mastery Quiz Trigger */}
+        <Chapter1ProgressBar
+          completedCount={ch1CompletedList.length}
+          totalCount={35}
+          record={record}
+          onOpenQuiz={() => setIsQuizOpen(true)}
+          accentColor="blue"
+        />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Card: Lesson 1-1 */}
@@ -414,6 +431,15 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
           })}
         </div>
       </div>
+
+      {/* Chapter 1 Mastery Quiz Modal */}
+      <Chapter1QuizModal
+        isOpen={isQuizOpen}
+        onClose={() => setIsQuizOpen(false)}
+        settings={settings}
+        record={record}
+        onUpdateRecord={onUpdateRecord}
+      />
     </div>
   );
 };

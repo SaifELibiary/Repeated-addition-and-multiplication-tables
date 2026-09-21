@@ -263,6 +263,12 @@ export const BranchingTreeDiagram: React.FC<BranchingTreeDiagramProps> = ({
                 <CheckCircle2 className="w-4 h-4" /> Correct
               </span>
             )}
+
+            {((isCheckAttempted && !isTopProdCorrect) || (Boolean(values.topProd) && (values.topProd || '').length >= String(problem.topBranch.product).length && !isTopProdCorrect)) && (
+              <span className="text-xs font-bold text-rose-700 bg-rose-100 px-2.5 py-1 rounded-lg border border-rose-200 flex items-center gap-1 animate-fadeIn">
+                <span>💡 Hint: Check {problem.topBranch.num1} × {problem.topBranch.num2} = ?</span>
+              </span>
+            )}
           </div>
 
           {/* Bottom Branch Card */}
@@ -371,6 +377,12 @@ export const BranchingTreeDiagram: React.FC<BranchingTreeDiagramProps> = ({
                 <CheckCircle2 className="w-4 h-4" /> Correct
               </span>
             )}
+
+            {((isCheckAttempted && !isBotProdCorrect) || (Boolean(values.botProd) && (values.botProd || '').length >= String(problem.bottomBranch.product).length && !isBotProdCorrect)) && (
+              <span className="text-xs font-bold text-rose-700 bg-rose-100 px-2.5 py-1 rounded-lg border border-rose-200 flex items-center gap-1 animate-fadeIn">
+                <span>💡 Hint: Check {problem.bottomBranch.num1} × {problem.bottomBranch.num2} = ?</span>
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -386,7 +398,7 @@ export const BranchingTreeDiagram: React.FC<BranchingTreeDiagramProps> = ({
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <span className="font-fun font-black text-base text-amber-950">
             A total of:
           </span>
@@ -415,6 +427,12 @@ export const BranchingTreeDiagram: React.FC<BranchingTreeDiagramProps> = ({
           {isTotalCorrect && (
             <span className="text-emerald-600 font-bold text-xs flex items-center gap-1">
               <Sparkles className="w-4 h-4" /> Perfect!
+            </span>
+          )}
+
+          {((isCheckAttempted && !isTotalCorrect) || (Boolean(values.total) && (values.total || '').length >= String(problem.total).length && !isTotalCorrect)) && (
+            <span className="text-xs font-bold text-rose-700 bg-rose-100 px-2.5 py-1 rounded-lg border border-rose-200 flex items-center gap-1 animate-fadeIn">
+              <span>💡 Hint: Add {problem.topBranch.product} + {problem.bottomBranch.product} = ?</span>
             </span>
           )}
         </div>
