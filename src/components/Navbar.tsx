@@ -29,8 +29,10 @@ export const Navbar: React.FC<NavbarProps> = ({
     if (next) soundEffects.pop();
   };
 
-  const navItems: { id: ScreenId; label: string; shortLabel: string; icon: string }[] = [
+  const navItems: { id: ScreenId; label: string; shortLabel: string; icon: string; badge?: string }[] = [
     { id: 'welcome', label: 'Home', shortLabel: 'Home', icon: '🏠' },
+    { id: 'lesson1_1', label: 'Lesson 1-1: Properties (Part 1)', shortLabel: '1-1 Rules', icon: '📘', badge: 'Ch. 1' },
+    { id: 'lesson1_2', label: 'Lesson 1-2: Breaking Up (Part 2)', shortLabel: '1-2 Breaking Up', icon: '🧩', badge: 'Ch. 1' },
     { id: 'module1', label: '1. What is Multiplication?', shortLabel: 'Concept', icon: '🧺' },
     { id: 'module2', label: '2. Times Tables (1–9)', shortLabel: 'Tables', icon: '📖' },
     { id: 'module3', label: '3. Practice Game', shortLabel: 'Game', icon: '🎮' },
@@ -146,6 +148,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span>{item.icon}</span>
                 <span className="hidden md:inline">{item.label}</span>
                 <span className="md:hidden">{item.shortLabel}</span>
+                {item.badge && (
+                  <span className={`text-[10px] font-black px-1.5 py-0.2 rounded-md ${isActive ? 'bg-white/25 text-white' : 'bg-blue-100 text-blue-700'}`}>
+                    {item.badge}
+                  </span>
+                )}
               </button>
             );
           })}

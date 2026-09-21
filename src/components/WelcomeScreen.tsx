@@ -117,6 +117,82 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
         speechEnabled={settings.speechEnabled}
       />
 
+      {/* CHAPTER 1: RULES OF MULTIPLICATION (GRADE 3 DEDICATED MODULES) */}
+      <div className="rounded-3xl bg-gradient-to-br from-blue-500/10 via-indigo-500/10 to-amber-500/10 border-3 border-blue-300/80 p-5 sm:p-7 space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-blue-200 pb-3">
+          <div className="flex items-center gap-2.5">
+            <span className="p-2 bg-blue-600 text-white rounded-2xl text-xl shadow-xs">
+              📘
+            </span>
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-100 px-2.5 py-0.5 rounded-full">
+                Featured Grade 3 Chapter
+              </span>
+              <h2 className="text-xl sm:text-2xl font-fun font-black text-slate-900">
+                Chapter 1: Rules of Multiplication
+              </h2>
+            </div>
+          </div>
+          <span className="text-xs font-bold text-slate-600 bg-white px-3 py-1 rounded-full border border-slate-200">
+            2 Interactive Lessons with Guided Trees & Drills
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Card: Lesson 1-1 */}
+          <div
+            onClick={() => {
+              soundEffects.pop();
+              onNavigate('lesson1_1');
+            }}
+            className="group cursor-pointer rounded-3xl bg-white border-2 border-blue-200 hover:border-blue-500 p-5 shadow-sm hover:shadow-md transition-all transform hover:-translate-y-1"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-3xl p-2.5 rounded-2xl bg-blue-100">📘</span>
+              <span className="text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">
+                Lesson 1-1
+              </span>
+            </div>
+            <h3 className="text-lg font-fun font-bold text-slate-800 group-hover:text-blue-700 transition-colors">
+              Properties of Multiplication (Part 1)
+            </h3>
+            <p className="text-sm text-slate-600 mt-1 mb-4 leading-relaxed">
+              Increasing & decreasing multipliers (7× table live demo), switching order (Commutative Property), 4 guided warm-ups, and 12 interactive drills!
+            </p>
+            <div className="flex items-center text-xs font-bold text-blue-600 gap-1">
+              <span>Start Lesson 1-1</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+
+          {/* Card: Lesson 1-2 */}
+          <div
+            onClick={() => {
+              soundEffects.pop();
+              onNavigate('lesson1_2');
+            }}
+            className="group cursor-pointer rounded-3xl bg-white border-2 border-amber-200 hover:border-amber-500 p-5 shadow-sm hover:shadow-md transition-all transform hover:-translate-y-1"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-3xl p-2.5 rounded-2xl bg-amber-100">🧩</span>
+              <span className="text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">
+                Lesson 1-2
+              </span>
+            </div>
+            <h3 className="text-lg font-fun font-bold text-slate-800 group-hover:text-amber-700 transition-colors">
+              Properties of Multiplication (Part 2)
+            </h3>
+            <p className="text-sm text-slate-600 mt-1 mb-4 leading-relaxed">
+              The Distributive Property! Break up multiplicands or multipliers using dynamic branching tree diagrams, auto-focusing inputs, and 6 drills!
+            </p>
+            <div className="flex items-center text-xs font-bold text-amber-600 gap-1">
+              <span>Start Lesson 1-2</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* 5 Learning Modules Grid */}
       <div>
         <div className="flex items-center justify-between mb-4">

@@ -8,6 +8,8 @@ import { Module2Explorer } from './components/Module2Explorer';
 import { Module3CustomGame } from './components/Module3CustomGame';
 import { Module4ArrayQuiz } from './components/Module4ArrayQuiz';
 import { Module5MasteryQuiz } from './components/Module5MasteryQuiz';
+import { Chapter1Lesson1 } from './components/Chapter1Lesson1';
+import { Chapter1Lesson2 } from './components/Chapter1Lesson2';
 import { TeacherSettingsModal } from './components/TeacherSettingsModal';
 import { CertificateModal } from './components/CertificateModal';
 import { MrSaifAvatar } from './components/MrSaifGuide';
@@ -87,6 +89,34 @@ export default function App() {
             settings={settings}
             record={record}
             onOpenTeacherSettings={() => setIsSettingsOpen(true)}
+          />
+        )}
+
+        {currentScreen === 'lesson1_1' && (
+          <Chapter1Lesson1
+            settings={settings}
+            record={record}
+            onUpdateRecord={handleUpdateRecord}
+            onNavigateToLesson2={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              setCurrentScreen('lesson1_2');
+            }}
+          />
+        )}
+
+        {currentScreen === 'lesson1_2' && (
+          <Chapter1Lesson2
+            settings={settings}
+            record={record}
+            onUpdateRecord={handleUpdateRecord}
+            onNavigateToModule1={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              setCurrentScreen('module1');
+            }}
+            onNavigateToLesson1={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              setCurrentScreen('lesson1_1');
+            }}
           />
         )}
 

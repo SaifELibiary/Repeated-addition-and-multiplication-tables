@@ -1,4 +1,12 @@
-export type ScreenId = 'welcome' | 'module1' | 'module2' | 'module3' | 'module4' | 'module5';
+export type ScreenId =
+  | 'welcome'
+  | 'lesson1_1'
+  | 'lesson1_2'
+  | 'module1'
+  | 'module2'
+  | 'module3'
+  | 'module4'
+  | 'module5';
 
 export type ContainerTheme = 'apples' | 'stars' | 'ducks' | 'cookies' | 'aliens';
 

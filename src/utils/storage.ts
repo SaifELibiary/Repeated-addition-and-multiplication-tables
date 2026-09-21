@@ -50,6 +50,20 @@ export const INITIAL_BADGES: Badge[] = [
     color: 'bg-rose-100 text-rose-700 border-rose-300',
   },
   {
+    id: 'properties_master',
+    title: 'Rules of Multiplication Master 📘',
+    description: 'Mastered multiplier rules & commutative property in Lesson 1-1!',
+    icon: '📘',
+    color: 'bg-blue-100 text-blue-700 border-blue-300',
+  },
+  {
+    id: 'breaking_up_expert',
+    title: 'Number Breaker Expert 🧩',
+    description: 'Mastered the Distributive Property by breaking up numbers in Lesson 1-2!',
+    icon: '🧩',
+    color: 'bg-amber-100 text-amber-700 border-amber-300',
+  },
+  {
     id: 'repeated_hero',
     title: 'Repeated Addition Hero 🦸‍♀️',
     description: 'Converted addition sentences to multiplication like a pro!',
